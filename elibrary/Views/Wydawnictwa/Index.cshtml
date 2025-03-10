@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Wydawnictwo>
+@{
+    ViewData["Title"] = "Lista Wydawnictw";
+}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table">
+            <thead>
+                <tr class="text-center">
+                    <th>@Html.DisplayNameFor(model => model.WydPictureURL)</th>
+                    <th>@Html.DisplayNameFor(model => model.NameWyd)</th>
+                    <th>@Html.DisplayNameFor(model => model.DescWyd) </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            <img class="rounded-circle" src="@item.WydPictureURL" alt="@item.NameWyd" style="max-width: 150px" />
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.NameWyd)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.DescWyd)
+                        </td>
+                        <td class="align-middle">
+                            <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit</a> |
+                            <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details </a> |
+                            <a class="btn btn-danger"><i class="bi bi-trash"></i>Delete </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
