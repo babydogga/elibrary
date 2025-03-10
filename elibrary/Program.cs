@@ -1,4 +1,6 @@
 using elibrary.Data;
+using elibrary.Data.Services;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +11,12 @@ builder.Services.AddControllersWithViews();
 //DbContext configuration
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnectionString")));
 
+// Services configuration
+builder.Services.AddScoped<IAutorzyService, AutorzyService>();
+
 var app = builder.Build();
+
+
 
 
 // Configure the HTTP request pipeline.

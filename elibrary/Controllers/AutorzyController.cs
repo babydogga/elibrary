@@ -1,4 +1,5 @@
 ﻿using elibrary.Data;
+using elibrary.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,15 +7,15 @@ namespace elibrary.Controllers
 {
     public class AutorzyController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IAutorzyService _service;
 
-        public AutorzyController(AppDbContext context)
+        public AutorzyController(IAutorzyService service)
         {
-            _context = context;
+            _service = service;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var data = _context.Autorzy.ToList();
+            var data = await _service.GetAll();
             return View(data);
         }
     }
