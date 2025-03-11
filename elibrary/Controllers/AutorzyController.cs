@@ -1,5 +1,6 @@
 ﻿using elibrary.Data;
-using elibrary.Data.Services;
+
+using elibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,16 +8,37 @@ namespace elibrary.Controllers
 {
     public class AutorzyController : Controller
     {
-        private readonly IAutorzyService _service;
+        private AppDbContext _db;
 
-        public AutorzyController(IAutorzyService service)
+        public AutorzyController(AppDbContext db)
         {
-            _service = service;
+            _db = db;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var data = await _service.GetAll();
+            var data = _db.Autorzy.ToList();
+
             return View(data);
         }
+
+        //Get: Autorzy/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Autor objAutor)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Autorzy.Add(objAutor);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            
+           return View();
+        }
+
     }
 }

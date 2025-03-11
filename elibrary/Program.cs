@@ -1,5 +1,5 @@
 using elibrary.Data;
-using elibrary.Data.Services;
+
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,8 +11,9 @@ builder.Services.AddControllersWithViews();
 //DbContext configuration
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnectionString")));
 
+
 // Services configuration
-builder.Services.AddScoped<IAutorzyService, AutorzyService>();
+
 
 var app = builder.Build();
 
